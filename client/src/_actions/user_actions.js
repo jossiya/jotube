@@ -1,5 +1,5 @@
 import axios from "axios";
-import {REGISTER_USER, LOGIN_USER, AUTH_USER, LOGOUT_USER} from './types'
+import {REGISTER_USER, LOGIN_USER, AUTH_USER, LOGOUT_USER, PROFILE_USER} from './types'
 
 export function loginUser(dataToSubmit){
    
@@ -22,7 +22,14 @@ export function registerUser(dataToSubmit){
         payload : reqeust
     }
 }   
-
+export function profile(dataToSubmit){
+    const reqeust =axios.post('/api/profile/imageUpdate',dataToSubmit)
+       .then(response=>response.data)
+   return{
+       type : PROFILE_USER,
+       payload : reqeust
+   }
+} 
 
 export function auth(){
     

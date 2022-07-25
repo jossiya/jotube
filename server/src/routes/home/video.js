@@ -25,7 +25,7 @@ const upload = multer({ storage: storage }).single("file")
 
 
 
-const proccess={
+const process={
     videouploadfile : (req, res)=>{
 
         const url = {
@@ -118,11 +118,16 @@ const proccess={
             const subresponse=await VideoInfo.subvideoInfos(subscribeTos)
             // console.log(subresponse)
             return res.json({success : true, subresponse : subresponse})
-    }
+    },
+    getMyVideos : async(req,res)=>{
+        const email =req.body.userEmail
+        const response= await VideoInfo.myVideos(email)
+        return res.json({success : true, myVideos : response})
+    },
 }
 
 module.exports={
-    proccess,
+    process,
 }
 //로그 
 const log =(response, url)=> {

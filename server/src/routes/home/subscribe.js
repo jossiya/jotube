@@ -1,7 +1,7 @@
 
 const Subscribe =require('../../models/Subscribe')
 
-const proccess={
+const process={
     subscribeNumber : async(req,res)=>{
         const userTo=req.body.userTo;
         // console.log('se',userTo)
@@ -46,5 +46,5 @@ const proccess={
 }
 
 module.exports={
-    proccess,
+    process,
 }

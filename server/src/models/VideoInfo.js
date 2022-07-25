@@ -11,20 +11,20 @@ class VideoInfo{
                 else resolve(data)
               
             })
-        });
-    }
+        })
+    };
     static videoInfo(videoid){
         // console.log('query:',videoid)
         return new Promise((resolve, reject)=>{
-            const query = "select * from users3,video WHERE videoid =?;"
+            const query = "select * from video left outer join users3 on users3.email=video.writer WHERE videoid =?;"
             db.query(query, [videoid], (err, data)=>{
                 if(err) {reject(`${err}`);
                
                 }else resolve(data[0])
                 // console.log(data[0])}
             })
-        });
-    }
+        })
+    };
     static subvideoInfos(user){
         console.log('쿼리:',user)
         return new Promise((resolve, reject)=>{
@@ -37,8 +37,21 @@ class VideoInfo{
                 else resolve(data)
               
             })
-        });
-    }
+        })
+    };
+    static myVideos(email){
+            // console.log('query:',email)
+            return new Promise((resolve, reject)=>{
+                const query = "select * from video WHERE writer=? order by title desc;"
+                db.query(query, [email], (err, data)=>{
+                    if(err) {reject(`${err}`);
+                   
+                    }else resolve(data)
+                    // console.log(data)
+                })
+            });
+        };
+
     
 
 
@@ -52,9 +65,8 @@ class VideoInfo{
             (err)=>{
             if(err) reject(`${err}`);
             else resolve({ success : true})
-        });
+            })
         })
-        
-    }
+    };
 }
 module.exports=VideoInfo

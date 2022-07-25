@@ -6,7 +6,8 @@ const saltRounds = 10;
 class UserStorage{
     
     static getUserInfo(email,req){
-        console.log('login :',email)
+        // console.log('loginㅇㅇ :',email)
+        // console.log("d",req)
         return new Promise((resolve, reject)=>{
             const query = "SELECT * FROM users3 WHERE email =?;"
             db.query(query,[email], (err, data)=>{
@@ -19,10 +20,11 @@ class UserStorage{
                 // console.log('session id :', sessionID);
                 //세션
                 if(data[0]!==undefined){
-                    req.session.uid=data[0].email;
+                    req.session.email=data[0].email;
                     req.session.name=data[0].name;
                     req.session.role=data[0].role;
                     req.session.image=data[0].image;
+                    req.session.uid=data[0].uid;
                     req.session.isLogined=true;
                         req.session.save(()=>{
 
@@ -32,9 +34,23 @@ class UserStorage{
     });
     };
 
+    static UserInfo(email,req){
+        // console.log('loginㅇㅇ :',email)
+        // console.log("d",req)
+        return new Promise((resolve, reject)=>{
+            const query = "SELECT * FROM users3 WHERE email =?;"
+            db.query(query,[email], (err, data)=>{
+                if(err) reject(`${err}`);
+                // console.log(data[0])
+                else resolve(data[0])
+            
+        });
+    });
+    };
+
     static save(userInfo){
         return new Promise((resolve, reject)=>{
-            const query = "INSERT INTO users3(name, email, password ) VALUES(?, ?, ?);";
+            const query = "INSERT INTO users3(uid,name, email, password ) VALUES((REPLACE(UUID(),'-','')),?, ?, ?);";
             bcrypt.genSalt(saltRounds, (err, salt)=>{
                 if(err) return {success : false, err}
                 bcrypt.hash(userInfo.password, salt, (err,hash)=>{

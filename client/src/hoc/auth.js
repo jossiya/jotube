@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export default function (ComposedClass, reload, adminRoute = null) {
     function AuthenticationCheck(props) {
 
-        let user = useSelector(state => state.user.userData);
+        let user = useSelector(state => state.user.userData)
         const dispatch = useDispatch();
         const navigate= useNavigate();
         
@@ -32,7 +32,7 @@ export default function (ComposedClass, reload, adminRoute = null) {
         }, [dispatch, navigate ])
 
         return (
-            <ComposedClass {...props} user={user} />
+            <ComposedClass {...props} user={user}/>
         )
     }
     return AuthenticationCheck

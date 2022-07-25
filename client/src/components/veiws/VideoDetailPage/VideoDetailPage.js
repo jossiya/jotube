@@ -29,7 +29,8 @@ function VideoDetailPage(props) {
       axios.post('/api/video/getVideoDetail',variable)
       .then(response=>{
         if(response.data.success){
-            // console.log('detail:',response.data)
+            console.log('detail:',response.data)
+            
             setVideoDetail(response.data.video)
         }else{
 
@@ -41,7 +42,7 @@ function VideoDetailPage(props) {
       .then(response=>{
         if(response.data.success){
           setComments(response.data.comments)
-          console.log(response.data.comments)
+          // console.log(response.data.comments)
         }else{
           alert('코맨트 정보를 가져오지 못했습니다.')
         }
@@ -53,25 +54,26 @@ function VideoDetailPage(props) {
     }
 
     if (user) {
-      console.log('프롭스 이메일:',props.user.email)
+      // console.log('프롭스 이메일:',props.user.email)
      if(VideoDetail.writer) {
 
       const subscribeButton= VideoDetail.writer !==props.user.email && <Subscribe userTo={VideoDetail.writer} userFrom={props.user.email} />
     
-      console.log('디테일 정보:',VideoDetail)
+      // console.log('디테일 정보:',VideoDetail)
       return(
         <Row gutter={[16, 16]}>
-            <Col lg={18} xs={24}>
+            <Col lg={19} xs={24}>
               
-            <div style={{width:'100%',padding : '3rem 4rem',marginTop :'1rem' }}>
-            <video style={{ width: '100%' }} src={`http://localhost:5000/${VideoDetail.filePath}`} controls></video>
+            <div style={{width:'100%',padding : '3rem 2rem',marginTop :'1rem' }} >
+            <video  style={{ width: '98%' }} src={`http://localhost:5000/${VideoDetail.filePath}`} controls autoPlay loop={true} muted={false}></video>
+            <div>{VideoDetail.title}</div>
                 <List.Item 
                     actions={[<LikeDisLikes video userId={props.user.email} videoId={videoid}/>,subscribeButton]}
                 >
-    
+                <a></a>
                 <List.Item.Meta
-                avatar={<Avatar src={VideoDetail.image}/>}
-                title={VideoDetail.title}
+                avatar={<Avatar src={`http://localhost:5000/${VideoDetail.image}`}/>}
+                title={<a href={"#"}>{VideoDetail.name}</a>}
                 description={VideoDetail.description}
                 />
                 </List.Item>
@@ -80,7 +82,7 @@ function VideoDetailPage(props) {
                 
             </div>
             </Col>
-            <Col lg={6} xs={24}>
+            <Col lg={5} xs={24}>
                 <SideVideo/>
             </Col>
     

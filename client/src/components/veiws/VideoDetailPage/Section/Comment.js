@@ -24,33 +24,33 @@ function Comment(props) {
     axios.post('/api/comment/saveComment', variable)
     .then(response=>{
       if(response.data.response.success){
-        console.log('commentInfo:',response.data.result)
+        // console.log('commentInfo:',response.data.result)
         props.refreshFunction(response.data.result)
         setcommentValue("")
       }else{
-        console.log('commentInfo:',response.data)
+        // console.log('commentInfo:',response.data)
         alert('댓글 저장을 하지 못했습니다.')
       }
     })
   }
 
-
+  // console.log("코맨트",props.commentList)
 
 if(props&&props.userFrom!==undefined){
-  console.log(props.userFrom)
+  // console.log(props.userFrom)
   return (
     <div>
       <br/>
       <p>댓글</p>
       <hr/>
       {props.commentList&&props.commentList.map((comment, index)=>(
-        (!comment.responseTo&&
+        ((!comment.responseTo&&
         <React.Fragment key={index}>
           <SingleComment  refreshFunction={props.refreshFunction}  comment={comment} userFrom={props.userFrom}/>
           <ReplyComment  refreshFunction={props.refreshFunction} parentCommentId={comment.commentid} commentList={props.commentList} userFrom={props.userFrom}/>
         </React.Fragment>
        
-        )
+        ))
       ))}
 
       <SingleComment refreshFunction={props.refreshFunction} userFrom={props.userFrom} commentList={props.commentList}/>

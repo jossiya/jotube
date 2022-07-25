@@ -1,6 +1,7 @@
 "use strict"
 const logger = require("../../config/logger");
 const User = require("../../models/User");
+const UserStorage=require('../../models/UserStorage')
 
 
 const views={
@@ -62,21 +63,26 @@ const process={
             log(response, url);
         return res.status(url.status).json(response)
     },
-    
+   
 };
 
 const middleware = {
     auth :async (req, res)=>{
+        
+        const response=await UserStorage.UserInfo(req.session.email)
+        // console.log('ddd',response)
         if(req.session.name===undefined){
            return await res.json({inAuth : false, error : true})}
           else res.status(200).json({
             userName : req.session.name,
             isAdmin :req.session.role === 0 ? false : true ,
             isAuth : true,
-            email : req.session.uid,
+            email : req.session.email,
+            uid : req.session.uid,
             role : req.session.role,
-            image : req.session.image,
+            image : response.image,
            })
+           console.log("갱신 이미지",response.image)
          
     },
 }

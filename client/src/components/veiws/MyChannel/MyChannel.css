@@ -1,0 +1,13 @@
+.nav .nav-tabs{
+    font-style: black !important;
+    color : black !important;
+    
+}
+.nav-tabs .nav-link{
+    
+    color : gray!important;
+}
+.nav-tabs .nav-link.active{
+    
+    color : black!important;
+}

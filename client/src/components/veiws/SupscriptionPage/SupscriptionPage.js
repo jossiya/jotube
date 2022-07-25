@@ -58,7 +58,7 @@ function SupscriptionPage(props) {
         <br />
         <Meta
             avatar={
-                <Avatar src={video.image} />
+                <Avatar src={`http://localhost:5000/${video.image}`} />
             }
             title={video.title}
         />
@@ -75,7 +75,7 @@ if(user){
         <Title level={2} > 구독한 영상 </Title>
         <hr />
 
-        <Row gutter={[32, 16]}>
+        <Row gutter={[16, 16]}>
 
           
             {renderCards}

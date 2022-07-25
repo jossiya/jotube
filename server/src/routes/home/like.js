@@ -1,6 +1,6 @@
 
 const Like=require('../../models/Like')
-const proccess={
+const process={
     //좋아요
     likeget : async(req,res)=>{
         let variable={}
@@ -92,4 +92,4 @@ dislikeget : async(req,res)=>{
     }
 }
 
-module.exports={proccess}
+module.exports={process}

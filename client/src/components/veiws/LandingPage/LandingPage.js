@@ -49,13 +49,13 @@ function LandingPage(props) {
         <br />
         <Meta
             avatar={
-                <Avatar src={video.image} />
+                <Avatar src={`http://localhost:5000/${video.image}`} />
             }
             title={video.title}
         />
         <span>{video.name} </span><br />
         <span style={{ marginLeft: '3rem ' }}> {video.views}</span>
-        - <span> {moment(video.createdAt).format("MMM Do YY")} </span>
+        <span> {moment(video.createdAt).format("MM월 DD일 YY년")} </span>
     </Col>
 
 })
@@ -67,7 +67,7 @@ return (
         <Title level={2} > 조튜브 </Title>
         <hr />
 
-        <Row gutter={[32, 16]}>
+        <Row gutter={[16, 16]}>
 
           
             {renderCards}

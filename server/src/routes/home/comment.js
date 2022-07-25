@@ -1,11 +1,11 @@
 const { json } = require('body-parser')
 const Comment=require('../../models/Comment')
-const proccess={
+const process={
     commentSave :async(req,res)=>{
         //저장 밑 불러오기
     const comment=req.body
-    const userid= req.session.uid
-    console.log("리플 코맨츠",comment) 
+    const userid= req.session.email
+    console.log("리플 코맨츠",userid) 
     try{
         const response=await Comment.save(comment)
         const result = await Comment.saveInfo(userid)
@@ -25,4 +25,4 @@ const proccess={
     }
 }
 
-module.exports={proccess}
+module.exports={process}

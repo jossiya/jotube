@@ -46,7 +46,7 @@ function SingleComment(props) {
     <span onClick={onClickOpenReply} key='comment-basic-reply-to'>댓글</span>
  ]
 
-   console.log('싱글',props.comment)
+  //  console.log('싱글',props.comment)
   if(props.comment){
     return (
    
